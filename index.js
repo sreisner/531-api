@@ -1,9 +1,18 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.get('/users/:userId', (req, res) => {
+    res.json({
+        userId: 123
+    });
+});
 
 app.get('/training-maxes', (req, res) => res.json({
     press: 135,
