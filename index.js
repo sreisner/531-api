@@ -1,6 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 app.get('/training-maxes', (req, res) => res.json({
     press: 135,
