@@ -1,8 +1,8 @@
 const passport = require('passport');
 const { User } = require('../models');
 
-const createEndpoints = app => {
-    app.route('/register')
+const createEndpoints = router => {
+    router.route('/register')
         .post((req, res, next) => {
             const { email, password } = req.body;
 
