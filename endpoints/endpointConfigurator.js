@@ -1,16 +1,19 @@
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const login = require('./login');
 const register = require('./register');
 const trainingMaxes = require('./trainingMaxes');
 
 const configureEndpoints = app => {
-    app.use(cors({
-        origin: 'http://localhost:3000',
-        credentials: true
-    }));
+    if (process.env.NODE_ENV !== 'production') {
+        app.use(cors({
+            origin: 'http://localhost:3000',
+            credentials: true
+        }));
+    }
 
     app.use(bodyParser.json());
     app.use(cookieParser());
@@ -23,6 +26,8 @@ const configureEndpoints = app => {
         },
         name: 'sessionid'
     }));
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     login.createEndpoints(app);
     register.createEndpoints(app);
