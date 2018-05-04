@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').load();
+}
+
 const express = require('express');
 const mongoConfigurator = require('./mongoConfigurator');
 const passportConfigurator = require('./passportConfigurator');
