@@ -57,16 +57,16 @@ const configureAuthenticatedRoutes = app => {
 
     router.use((req, res, next) => {
         if (req.isUnauthenticated()) {
-            res.status(401);
-            return next('Unauthorized');
+            res.status(401).end();
+        } else {
+            next();
         }
-
-        return next();
     });
-
+    
     users.createEndpoints(router);
-
+    
     app.use(router);
+    
 };
 
 module.exports = {
