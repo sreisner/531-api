@@ -18,7 +18,7 @@ const configureEndpoints = app => {
     app.use(bodyParser.json());
     app.use(cookieParser());
     app.use(session({
-        secret: 'secret',
+        secret: process.env.SESSION_SECRET,
         saveUninitialized: true,
         resave: true,
         cookie: {
