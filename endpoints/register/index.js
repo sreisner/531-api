@@ -1,5 +1,5 @@
 const passport = require('passport');
-const { User } = require('../models');
+const { User } = require('../../models');
 
 const createEndpoints = router => {
     router.route('/register')

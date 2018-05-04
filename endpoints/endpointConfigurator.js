@@ -6,9 +6,15 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const login = require('./login');
 const register = require('./register');
-const trainingMaxes = require('./trainingMaxes');
+const users = require('./users');
 
 const configureEndpoints = app => {
+    configureMiddleware(app);
+    configureUnauthenticatedRoutes(app);
+    configureAuthenticatedRoutes(app);
+};
+
+const configureMiddleware = app => {
     if (process.env.NODE_ENV !== 'production') {
         app.use(cors({
             origin: 'http://localhost:3000',
@@ -29,14 +35,27 @@ const configureEndpoints = app => {
     }));
     app.use(passport.initialize());
     app.use(passport.session());
+};
 
-    
-    const unauthorizedEndpoints = express.Router();
-    login.createEndpoints(unauthorizedEndpoints);
-    register.createEndpoints(unauthorizedEndpoints);
-    
-    const authorizedEndpoints = express.Router();
-    authorizedEndpoints.use((req, res, next) => {
+/*
+    Routes that do not require a session
+*/
+const configureUnauthenticatedRoutes = app => {
+    const router = express.Router();
+
+    login.createEndpoints(router);
+    register.createEndpoints(router);
+
+    app.use(router);
+};
+
+/*
+    Routes that require a valid session
+*/
+const configureAuthenticatedRoutes = app => {
+    const router = express.Router();
+
+    router.use((req, res, next) => {
         if (req.isUnauthenticated()) {
             res.status(401);
             return next('Unauthorized');
@@ -45,9 +64,9 @@ const configureEndpoints = app => {
         return next();
     });
 
-    trainingMaxes.createEndpoints(authorizedEndpoints);
+    users.createEndpoints(router);
 
-    app.use(unauthorizedEndpoints, authorizedEndpoints);
+    app.use(router);
 };
 
 module.exports = {
