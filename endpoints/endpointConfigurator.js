@@ -4,6 +4,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const login = require('./login');
 const register = require('./register');
+const trainingMaxes = require('./trainingMaxes');
 
 const configureEndpoints = app => {
     app.use(cors({
@@ -26,6 +27,7 @@ const configureEndpoints = app => {
 
     login.createEndpoints(app);
     register.createEndpoints(app);
+    trainingMaxes.createEndpoints(app);
 };
 
 module.exports = {
