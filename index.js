@@ -2,15 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const mongoConfigurator = require('./mongoConfigurator');
+const passportConfigurator = require('./passportConfigurator');
+const endpointConfigurator = require('./endpoints/endpointConfigurator');
 
 const app = express();
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.post('/login', passport.authenticate('local'), (res, req) => {
-
-});
+mongoConfigurator.connect();
+passportConfigurator.configurePassport(app);
+endpointConfigurator.configureEndpoints(app);
 
 app.listen(3001, () => console.log('Running...'));
