@@ -1,12 +1,19 @@
 const express = require('express');
-const trainingMaxes = require('./trainingMaxes');
 
 const createEndpoints = router => {
-    const userRouter = express.Router();
+    router.route('/users/:userId')
+        .get((req, res) => {
+            if (req.params.userId === 'current') {
+                res.json(req.user).end();
+            }
+        })
 
-    trainingMaxes.createEndpoints(userRouter);
-
-    router.use('/users/:userId', userRouter);
+    router.route('/users/:userId/training-maxes')
+        .get((req, res) => {
+            res.json({
+                squat: 315
+            });
+        });
 };
 
 module.exports = {

@@ -66,7 +66,6 @@ const configureAuthenticatedRoutes = app => {
     users.createEndpoints(router);
     
     app.use(router);
-    
 };
 
 module.exports = {
