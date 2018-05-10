@@ -19,7 +19,7 @@ const configureMiddleware = app => {
     app.use(
       cors({
         origin: true,
-        credentials: true
+        credentials: true,
       })
     );
   }
@@ -32,9 +32,9 @@ const configureMiddleware = app => {
       saveUninitialized: true,
       resave: true,
       cookie: {
-        maxAge: +process.env.SESSION_MAX_AGE
+        maxAge: +process.env.SESSION_MAX_AGE,
       },
-      name: 'sessionid'
+      name: 'sessionid',
     })
   );
   app.use(passport.initialize());
@@ -73,5 +73,5 @@ const configureAuthenticatedRoutes = app => {
 };
 
 module.exports = {
-  configureEndpoints
+  configureEndpoints,
 };

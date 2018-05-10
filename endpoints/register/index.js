@@ -16,7 +16,7 @@ const createEndpoints = router => {
 
       const newUser = new User({
         email,
-        password
+        password,
       });
 
       newUser.save((err, newUser) => {
@@ -31,5 +31,5 @@ const createEndpoints = router => {
 };
 
 module.exports = {
-  createEndpoints
+  createEndpoints,
 };

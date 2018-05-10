@@ -7,7 +7,7 @@ const configurePassport = app => {
   passport.use(
     new LocalStrategy(
       {
-        usernameField: 'email'
+        usernameField: 'email',
       },
       (email, password, done) => {
         const filter = { email };
@@ -26,7 +26,7 @@ const configurePassport = app => {
 
           return done(null, {
             id: user.id,
-            email: user.email
+            email: user.email,
           });
         };
 
@@ -43,5 +43,5 @@ const configurePassport = app => {
 };
 
 module.exports = {
-  configurePassport
+  configurePassport,
 };

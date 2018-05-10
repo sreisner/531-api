@@ -7,5 +7,5 @@ const createEndpoints = router => {
 };
 
 module.exports = {
-  createEndpoints
+  createEndpoints,
 };

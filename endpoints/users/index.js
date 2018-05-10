@@ -1,5 +1,3 @@
-const express = require('express');
-
 const createEndpoints = router => {
   router.route('/users/:userId').get((req, res) => {
     if (req.params.userId === 'current') {
@@ -12,11 +10,11 @@ const createEndpoints = router => {
       squat: 315,
       deadlift: 405,
       bench: 225,
-      press: 135
+      press: 135,
     });
   });
 };
 
 module.exports = {
-  createEndpoints
+  createEndpoints,
 };
