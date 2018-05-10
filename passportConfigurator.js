@@ -4,44 +4,44 @@ const mongoose = require('mongoose');
 const { User } = require('./models');
 
 const configurePassport = app => {
-    passport.use(
-        new LocalStrategy(
-            {
-                usernameField: 'email'
-            },
-            (email, password, done) => {
-                const filter = { email };
-                const callback = (err, user) => {
-                    if (err) {
-                        return done(err);
-                    }
-                    
-                    if (!user) {
-                        return done(null, false);
-                    }
+  passport.use(
+    new LocalStrategy(
+      {
+        usernameField: 'email'
+      },
+      (email, password, done) => {
+        const filter = { email };
+        const callback = (err, user) => {
+          if (err) {
+            return done(err);
+          }
 
-                    if (user.password !== password) {
-                        return done(null, false);
-                    }
+          if (!user) {
+            return done(null, false);
+          }
 
-                    return done(null, {
-                        id: user.id,
-                        email: user.email
-                    });
-                };
+          if (user.password !== password) {
+            return done(null, false);
+          }
 
-                User.findOne(
-                    filter,
-                    callback
-                );
-            }));
+          return done(null, {
+            id: user.id,
+            email: user.email
+          });
+        };
 
-    passport.serializeUser((user, done) => done(null, user.id));
+        User.findOne(filter, callback);
+      }
+    )
+  );
 
-    passport.deserializeUser((id, done) =>
-        User.findById(id, (err, user) => done(err, user)));
+  passport.serializeUser((user, done) => done(null, user.id));
+
+  passport.deserializeUser((id, done) =>
+    User.findById(id, (err, user) => done(err, user))
+  );
 };
 
 module.exports = {
-    configurePassport
+  configurePassport
 };
