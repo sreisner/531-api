@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const login = require('./login');
 const register = require('./register');
 const users = require('./users');
+const templates = require('./templates');
 
 const configureEndpoints = app => {
   configureMiddleware(app);
@@ -49,6 +50,7 @@ const configureUnauthenticatedRoutes = app => {
 
   login.createEndpoints(router);
   register.createEndpoints(router);
+  templates.createEndpoints(router);
 
   app.use(router);
 };

@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
-const mongoConfigurator = require('./mongoConfigurator');
+const mongoConfigurator = require('./db/mongoConfigurator');
 const passportConfigurator = require('./passportConfigurator');
 const endpointConfigurator = require('./endpoints/endpointConfigurator');
 
