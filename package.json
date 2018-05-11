@@ -7,8 +7,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "db": "mongod --dbpath ./data",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "lint-staged"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -21,8 +20,8 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "mongodb": "^3.0.7",
-    "mongoose": "^5.0.17",
+    "mongodb": "^3.0.8",
+    "mongoose": "^5.1.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
   },
@@ -30,15 +29,7 @@
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.1.0",
     "nodemon": "^1.17.4",
     "prettier": "^1.12.1"
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }
