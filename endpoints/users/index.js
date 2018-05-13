@@ -7,10 +7,10 @@ const createEndpoints = router => {
 
   router.route('/users/:userId/training-maxes').get((req, res) => {
     res.json({
-      squat: 315,
-      deadlift: 405,
-      bench: 225,
-      press: 135,
+      squat: 225.5,
+      deadlift: 243.5,
+      bench: 180.5,
+      press: 117.5,
     });
   });
 };

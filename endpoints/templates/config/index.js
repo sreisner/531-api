@@ -133,17 +133,16 @@ const standard351WeeklyRepSchemes = [
   ],
 ];
 
-const foreverBBBConfig = options => {
-  const { repScheme: repSchemeName, advanced, daysPerWeek } = options;
-  const dailyLifts = options.dailyLifts.split(',');
+const foreverBBBConfig = ({ advanced, daysPerWeek, programming }) => {
+  const lifts = ['squat', 'bench', 'deadlift', 'press'];
 
   const repScheme =
-    repSchemeName === '531'
+    programming === '531'
       ? standard531WeeklyRepSchemes
       : standard351WeeklyRepSchemes;
 
   const supplementalTmPercentages =
-    repSchemeName === '531'
+    programming === '531'
       ? advanced
         ? [0.4, 0.5, 0.6]
         : [0.5, 0.6, 0.7]
@@ -152,7 +151,7 @@ const foreverBBBConfig = options => {
         : [0.6, 0.5, 0.7];
 
   return {
-    dailyLifts,
+    lifts,
     daysPerWeek,
     jumpsThrows: 10,
     weeklyRepSchemes: repScheme.map((week, i) => [
@@ -181,18 +180,30 @@ const foreverBBBConfig = options => {
   };
 };
 
-const templateConfigMap = {
-  'Forever BBB': foreverBBBConfig,
+const templateVariantConfigMap = {
+  'Boring But Big': {
+    Forever: foreverBBBConfig,
+  },
 };
 
 const createEndpoints = router => {
-  router.route('/templates/:templateId/config').get((req, res) => {
-    Template.findById(req.params.templateId, ['name'], (err, template) => {
-      const config = templateConfigMap[template.name];
+  router
+    .route('/templates/:templateId/variants/:variantId/config')
+    .get((req, res) => {
+      const { templateId, variantId } = req.params;
       const options = JSON.parse(base64.decode(req.query.options));
-      res.json(config(options));
+
+      Template.findById(templateId, (err, model) => {
+        const template = model.toObject();
+
+        const variants = template.variants;
+        const variant = variants.find(v => v.id.toString() === variantId);
+
+        res.json(
+          templateVariantConfigMap[template.name][variant.name](options)
+        );
+      });
     });
-  });
 };
 
 module.exports = {
