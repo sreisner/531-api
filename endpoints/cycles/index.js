@@ -1,5 +1,5 @@
 const { Template } = require('../../db/models');
-const generateCycle = require('./cycleGenerator.service');
+const { generateCycle } = require('./cycleGenerator.service');
 const configs = require('./config');
 const base64 = require('base-64');
 

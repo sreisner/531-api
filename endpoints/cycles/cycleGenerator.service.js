@@ -44,4 +44,4 @@ const generateCycle = (config, trainingMaxes, options) => ({
   assistance: config.assistance,
 });
 
-module.exports = generateCycle;
+module.exports = { generateCycle };

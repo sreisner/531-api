@@ -1,3 +1,13 @@
+const getMainLiftPercentages = programming => {
+  switch (programming) {
+    case '351':
+      return [[0.7, 0.8, 0.9], [0.65, 0.75, 0.85], [0.75, 0.85, 0.95]];
+    case '531':
+    default:
+      return [[0.65, 0.75, 0.85], [0.7, 0.8, 0.9], [0.75, 0.85, 0.95]];
+  }
+};
+
 const foreverBBBConfig = ({ advanced, daysPerWeek, programming }) => {
   const lifts = ['bench', 'deadlift', 'press', 'squat'];
 
@@ -10,20 +20,7 @@ const foreverBBBConfig = ({ advanced, daysPerWeek, programming }) => {
         ? [0.5, 0.4, 0.6]
         : [0.6, 0.5, 0.7];
 
-  const mainLift351Percentages = [
-    [0.7, 0.8, 0.9],
-    [0.65, 0.75, 0.85],
-    [0.75, 0.85, 0.95],
-  ];
-
-  const mainLift531Percentages = [
-    [0.65, 0.75, 0.85],
-    [0.7, 0.8, 0.9],
-    [0.75, 0.85, 0.95],
-  ];
-
-  const mainLiftPercentages =
-    programming === '531' ? mainLift531Percentages : mainLift351Percentages;
+  const mainLiftPercentages = getMainLiftPercentages(programming);
 
   return {
     lifts,
@@ -70,21 +67,30 @@ const alternateLiftMap = {
 const originalBBBConfig = ({
   daysPerWeek,
   programming,
-  squatSuppTm,
-  deadliftSuppTm,
-  pressSuppTm,
-  benchSuppTm,
+  squatSupplementalTmPercentage,
+  deadliftSupplementalTmPercentage,
+  pressSupplementalTmPercentage,
+  benchSupplementalTmPercentage,
+  alternate,
 }) => {
   const lifts = ['squat', 'bench', 'deadlift', 'press'];
+
+  const mainLiftPercentages = getMainLiftPercentages(programming);
 
   return {
     lifts,
     daysPerWeek,
     jumpsThrows: 10,
-    weeklyRepSchemes: repScheme.map((week, i) => [
-      ...week,
+    weeklyRepSchemes: mainLiftPercentages.map((week, i) => [
+      ...week.map(percentage => ({
+        percentage,
+        reps: 5,
+        sets: 1,
+        liftIndex: 0,
+      })),
       {
-        percentage: supplementalTmPercentages[i],
+        // TODO:  Don't just use the squat supplemental %
+        percentage: squatSupplementalTmPercentage,
         reps: 10,
         sets: 5,
         liftIndex: 0,
