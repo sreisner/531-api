@@ -3,7 +3,7 @@ const { Template } = require('../../../db/models');
 
 /*
 The liftIndex is used for days programmed with different lifts.
-For example in Forever BBB, users have the option to do squats
+For example in Original BBB, users have the option to do squats
 for the 5/3/1 sets (so that will end up being liftIndex 0) and
 deadlifts for the 5x10 sets (which will end up being liftIndex 1)
 */
@@ -180,9 +180,62 @@ const foreverBBBConfig = ({ advanced, daysPerWeek, programming }) => {
   };
 };
 
+const alternateLiftMap = {
+  squat: 'deadlift',
+  deadlift: 'squat',
+  bench: 'press',
+  press: 'bench',
+};
+
+const originalBBBConfig = ({
+  daysPerWeek,
+  programming,
+  squatSuppTm,
+  deadliftSuppTm,
+  pressSuppTm,
+  benchSuppTm,
+}) => {
+  const lifts = ['squat', 'bench', 'deadlift', 'press'];
+
+  const repScheme =
+    programming === '531'
+      ? standard531WeeklyRepSchemes
+      : standard351WeeklyRepSchemes;
+
+  return {
+    lifts,
+    daysPerWeek,
+    jumpsThrows: 10,
+    weeklyRepSchemes: repScheme.map((week, i) => [
+      ...week,
+      {
+        percentage: supplementalTmPercentages[i],
+        reps: 10,
+        sets: 5,
+        liftIndex: 0,
+      },
+    ]),
+    assistance: {
+      push: {
+        minReps: 25,
+        maxReps: 50,
+      },
+      pull: {
+        minReps: 25,
+        maxReps: 50,
+      },
+      abs: {
+        minReps: 0,
+        maxReps: 50,
+      },
+    },
+  };
+};
+
 const templateVariantConfigMap = {
   'Boring But Big': {
     Forever: foreverBBBConfig,
+    Original: originalBBBConfig,
   },
 };
 
