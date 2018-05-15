@@ -9,7 +9,7 @@ const getMainLiftPercentages = programming => {
 };
 
 const foreverBBBConfig = ({ advanced, daysPerWeek, programming }) => {
-  const lifts = ['bench', 'deadlift', 'press', 'squat'];
+  const lifts = ['squat', 'bench', 'deadlift', 'press'];
 
   const supplementalTmPercentages =
     programming === '531'
@@ -31,13 +31,11 @@ const foreverBBBConfig = ({ advanced, daysPerWeek, programming }) => {
         percentage,
         reps: 5,
         sets: 1,
-        liftIndex: 0,
       })),
       {
         percentage: supplementalTmPercentages[i],
         reps: 10,
         sets: 5,
-        liftIndex: 0,
       },
     ]),
     assistance: {
@@ -86,14 +84,12 @@ const originalBBBConfig = ({
         percentage,
         reps: 5,
         sets: 1,
-        liftIndex: 0,
       })),
       {
         // TODO:  Don't just use the squat supplemental %
         percentage: squatSupplementalTmPercentage,
         reps: 10,
         sets: 5,
-        liftIndex: 0,
       },
     ]),
     assistance: {
