@@ -18,7 +18,13 @@ const getSupplementalTmPercentages = (programming, advanced) => {
 };
 
 const foreverBBBGenerator = (trainingMaxes, options) => {
-  const { numDaysPerWeek, advanced, programming, startingLift } = options;
+  const {
+    numDaysPerWeek,
+    advanced,
+    programming,
+    startingLift,
+    light,
+  } = options;
 
   const nextLiftGenerator = repeatedArray(getLiftOrder(startingLift));
 
@@ -51,7 +57,7 @@ const foreverBBBGenerator = (trainingMaxes, options) => {
           // supplemental sets
           {
             lift: mainLift,
-            numSets: 5,
+            numSets: light ? 3 : 5,
             numReps: 10,
             weight: calculateSetWeight(
               trainingMaxes[mainLift],
