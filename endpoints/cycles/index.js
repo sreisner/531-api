@@ -1,7 +1,6 @@
-const { Template } = require('../../db/models');
-const { generateCycle } = require('./cycleGenerator.service');
-const configs = require('./config');
 const base64 = require('base-64');
+const { Template } = require('../../db/models');
+const getTemplateGenerator = require('./generators');
 
 const createEndpoints = router => {
   router.route('/cycles').get((req, res) => {
@@ -30,9 +29,9 @@ const createEndpoints = router => {
       const variants = template.variants;
       const variant = variants.find(v => v.id.toString() === variantId);
 
-      const config = configs[template.name][variant.name](options);
+      const generatorFunc = getTemplateGenerator(template.name, variant.name);
 
-      res.json(generateCycle(config, trainingMaxes, options));
+      res.json(generatorFunc(trainingMaxes, options));
     });
   });
 };
