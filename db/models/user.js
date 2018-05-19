@@ -51,7 +51,7 @@ const UserSchema = Schema({
   password: String,
   trainingMaxes: { type: TrainingMaxesSchema, default: TrainingMaxesSchema },
   currentCycle: CycleSchema,
-  pastCycles: { type: [CycleSchema], default: [] },
+  pastCycles: [CycleSchema],
 });
 
 module.exports = {
