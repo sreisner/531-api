@@ -12,8 +12,7 @@ const cycles = require('./cycles');
 
 const configureEndpoints = app => {
   configureMiddleware(app);
-  configureUnauthenticatedRoutes(app);
-  configureAuthenticatedRoutes(app);
+  configureRoutes(app);
 };
 
 const configureMiddleware = app => {
@@ -43,24 +42,30 @@ const configureMiddleware = app => {
   app.use(passport.session());
 };
 
-/*
-    Routes that do not require a session
-*/
-const configureUnauthenticatedRoutes = app => {
-  const router = express.Router();
-
-  login.createEndpoints(router);
-  register.createEndpoints(router);
-  templates.createEndpoints(router);
-  cycles.createEndpoints(router);
-
-  app.use(router);
+const configureRoutes = app => {
+  configureUnauthenticatedRoutes(app);
+  configureAuthenticatedRoutes(app);
 };
 
-/*
-    Routes that require a valid session
-*/
+const configureUnauthenticatedRoutes = app => {
+  const unauthenticatedRouter = express.Router();
+  login.createEndpoints(unauthenticatedRouter);
+  register.createEndpoints(unauthenticatedRouter);
+  templates.createEndpoints(unauthenticatedRouter);
+  cycles.createEndpoints(unauthenticatedRouter);
+  users.createUnauthenticatedEndpoints(unauthenticatedRouter);
+
+  app.use(unauthenticatedRouter);
+};
+
 const configureAuthenticatedRoutes = app => {
+  const authenticatedRouter = getAuthenticatedRouter();
+  users.createAuthenticatedEndpoints(authenticatedRouter);
+
+  app.use(authenticatedRouter);
+};
+
+const getAuthenticatedRouter = () => {
   const router = express.Router();
 
   router.use((req, res, next) => {
@@ -71,9 +76,7 @@ const configureAuthenticatedRoutes = app => {
     }
   });
 
-  users.createEndpoints(router);
-
-  app.use(router);
+  return router;
 };
 
 module.exports = {

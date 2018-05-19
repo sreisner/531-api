@@ -1,12 +1,6 @@
 const { User } = require('../../db/models');
 
-const createEndpoints = router => {
-  router.route('/users/:userId').get((req, res) => {
-    if (req.params.userId === 'current') {
-      res.json(req.user).end();
-    }
-  });
-
+const createAuthenticatedEndpoints = router => {
   router
     .route('/users/:userId/training-maxes')
     .get((req, res) => {
@@ -30,8 +24,28 @@ const createEndpoints = router => {
         });
       });
     });
+
+  router.route('/users/:userId/current-cycle').put((req, res) => {
+    let userId =
+      req.params.userId === 'current' ? req.user.id : req.params.userId;
+
+    User.findById(userId, (err, user) => {
+      user.save(err => {
+        if (err) throw err;
+
+        res.send({});
+      });
+    });
+  });
+};
+
+const createUnauthenticatedEndpoints = router => {
+  router.route('/users/current').get((req, res) => {
+    res.json(req.user || {}).end();
+  });
 };
 
 module.exports = {
-  createEndpoints,
+  createUnauthenticatedEndpoints,
+  createAuthenticatedEndpoints,
 };
