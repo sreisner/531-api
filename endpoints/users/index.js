@@ -25,11 +25,13 @@ const createAuthenticatedEndpoints = router => {
       });
     });
 
-  router.route('/users/:userId/current-cycle').put((req, res) => {
+  router.route('/users/:userId/cycles/current').put((req, res) => {
     let userId =
       req.params.userId === 'current' ? req.user.id : req.params.userId;
 
     User.findById(userId, (err, user) => {
+      user.currentCycle = req.body;
+
       user.save(err => {
         if (err) throw err;
 
