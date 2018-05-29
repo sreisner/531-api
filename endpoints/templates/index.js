@@ -1,11 +1,7 @@
-const { Template } = require('../../db/models');
+const templates = require('./templates');
 
 const createEndpoints = router => {
-  router.route('/templates').get((req, res) => {
-    Template.find((err, templates) => res.json(templates));
-  });
+  templates.createEndpoints(router);
 };
 
-module.exports = {
-  createEndpoints,
-};
+module.exports = { createEndpoints };

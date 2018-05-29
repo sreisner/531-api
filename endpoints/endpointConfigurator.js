@@ -43,26 +43,11 @@ const configureMiddleware = app => {
 };
 
 const configureRoutes = app => {
-  configureUnauthenticatedRoutes(app);
-  configureAuthenticatedRoutes(app);
-};
-
-const configureUnauthenticatedRoutes = app => {
-  const unauthenticatedRouter = express.Router();
-  login.createEndpoints(unauthenticatedRouter);
-  register.createEndpoints(unauthenticatedRouter);
-  templates.createEndpoints(unauthenticatedRouter);
-  cycles.createEndpoints(unauthenticatedRouter);
-  users.createUnauthenticatedEndpoints(unauthenticatedRouter);
-
-  app.use(unauthenticatedRouter);
-};
-
-const configureAuthenticatedRoutes = app => {
-  const authenticatedRouter = getAuthenticatedRouter();
-  users.createAuthenticatedEndpoints(authenticatedRouter);
-
-  app.use(authenticatedRouter);
+  login.createEndpoints(app);
+  register.createEndpoints(app);
+  templates.createEndpoints(app);
+  cycles.createEndpoints(app);
+  users.createEndpoints(app);
 };
 
 const getAuthenticatedRouter = () => {
