@@ -42,6 +42,8 @@ const SessionSchema = Schema({
   jumpsThrows: { type: Number, min: 0 },
   sets: [SetSchema],
   assistance: AssistanceSchema,
+  inProgress: { type: Boolean, default: false },
+  isComplete: { type: Boolean, default: false },
 });
 
 const CycleSchema = Schema({
