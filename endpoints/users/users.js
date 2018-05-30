@@ -13,13 +13,17 @@ const createEndpoints = router => {
   router
     .route('/users/me/current-cycle')
     .get((req, res) => {
-      if (req.user.currentCycleId) {
-        Cycle.findById(req.user.currentCycleId, (err, cycle) => {
-          res.json(cycle);
-        });
-      } else {
-        res.status(204).end();
-      }
+      User.findById(req.user._id, (err, user) => {
+        if (err) throw err;
+
+        if (user.currentCycleId) {
+          Cycle.findById(req.user.currentCycleId, (err, cycle) => {
+            res.json(cycle);
+          });
+        } else {
+          res.status(204).end();
+        }
+      });
     })
     .put((req, res) => {
       const currentCycleId = req.body.cycleId;
