@@ -7,11 +7,13 @@ const createEndpoints = router => {
 
     User.findOne({ email }, (err, user) => {
       if (err) {
-        return next('An unknown error occurred');
+        return res
+          .status(500)
+          .send('An unknown error occurred.  Please try again later.');
       }
 
       if (user) {
-        return next(`User ${user.email} already exists`);
+        return res.status(409).send(`User ${user.email} already exists`);
       }
 
       const newUser = new User({
