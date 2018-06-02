@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const { User } = require('./db/models');
 
 const configurePassport = app => {
@@ -20,13 +21,21 @@ const configurePassport = app => {
             return done(null, false);
           }
 
-          if (user.password !== password) {
-            return done(null, false);
-          }
+          bcrypt.compare(password, user.password, (err, match) => {
+            if (err) {
+              res
+                .status(500)
+                .send('An unknown error occurred.  Please try again later.');
+            }
 
-          return done(null, {
-            id: user.id,
-            email: user.email,
+            if (match) {
+              done(null, {
+                id: user.id,
+                email: user.email,
+              });
+            } else {
+              done(null, false);
+            }
           });
         };
 

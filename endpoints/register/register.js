@@ -1,4 +1,5 @@
 const passport = require('passport');
+const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
 
 const createEndpoints = router => {
@@ -16,17 +17,26 @@ const createEndpoints = router => {
         return res.status(409).send(`User ${user.email} already exists`);
       }
 
-      const newUser = new User({
-        email,
-        password,
-      });
-
-      newUser.save((err, newUser) => {
+      bcrypt.hash(password, 10, (err, hashedPassword) => {
         if (err) {
-          return next('An unknown error occurred');
+          return res
+            .status(500)
+            .send('An unknown error occurred.  Please try again later.');
         }
+        const newUser = new User({
+          email,
+          password: hashedPassword,
+        });
 
-        res.json(newUser);
+        newUser.save((err, newUser) => {
+          if (err) {
+            return res
+              .status(500)
+              .send('An unknown error occurred.  Please try again later.');
+          }
+
+          res.json(newUser);
+        });
       });
     });
   });
