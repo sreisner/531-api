@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 const { Cycle } = require('./cycle');
 
 const UserSchema = Schema({
+  firstName: String,
+  lastName: String,
   email: String,
   password: String,
   currentCycleId: Schema.Types.ObjectId,

@@ -4,7 +4,7 @@ const { User } = require('../../db/models');
 
 const createEndpoints = router => {
   router.route('/register').post((req, res, next) => {
-    const { email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     User.findOne({ email }, (err, user) => {
       if (err) {
@@ -24,6 +24,8 @@ const createEndpoints = router => {
             .send('An unknown error occurred.  Please try again later.');
         }
         const newUser = new User({
+          firstName,
+          lastName,
           email,
           password: hashedPassword,
         });
