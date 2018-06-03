@@ -39,6 +39,8 @@ const AssistanceSchema = Schema(
 );
 
 const SessionSchema = Schema({
+  week: Number,
+  day: Number,
   jumpsThrows: { type: Number, min: 0 },
   sets: [SetSchema],
   assistance: AssistanceSchema,
@@ -47,7 +49,7 @@ const SessionSchema = Schema({
 });
 
 const CycleSchema = Schema({
-  sessions: [[SessionSchema]],
+  sessions: [SessionSchema],
   trainingMaxes: TrainingMaxesSchema,
   options: Object,
   templateId: Schema.Types.ObjectId,

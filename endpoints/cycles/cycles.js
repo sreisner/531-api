@@ -11,19 +11,37 @@ const createEndpoints = router => {
     });
   });
 
-  router.route('/cycles/:cycleId/sessions/:sessionId').get((req, res) => {
-    const { cycleId, sessionId } = req.params;
+  router
+    .route('/cycles/:cycleId/sessions/:sessionId')
+    .get((req, res) => {
+      const { cycleId, sessionId } = req.params;
 
-    Cycle.findById(cycleId, (err, cycle) => {
-      if (err) throw err;
+      Cycle.findById(cycleId, (err, cycle) => {
+        if (err) throw err;
 
-      res.json(
-        cycle.sessions
-          .reduce((acc, curr) => [...acc, ...curr], [])
-          .find(session => session.id === sessionId)
-      );
+        res.json(cycle.sessions.find(session => session.id === sessionId));
+      });
+    })
+    .patch((req, res) => {
+      const { cycleId, sessionId } = req.params;
+
+      Cycle.findById(cycleId, (err, cycle) => {
+        if (err) throw err;
+
+        const session = cycle.sessions.find(
+          session => session.id === sessionId
+        );
+
+        Object.entries(req.body).forEach(keyValue => {
+          const [key, value] = keyValue;
+          session[key] = value;
+        });
+
+        cycle.save((err, cycle) => {
+          res.status(204).send();
+        });
+      });
     });
-  });
 
   router.route('/cycles').post((req, res) => {
     const cycle = new Cycle(req.body);

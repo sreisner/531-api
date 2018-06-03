@@ -35,23 +35,28 @@ const foreverBBBGenerator = (trainingMaxes, options) => {
     advanced
   );
 
-  // all sessions - 3 weeks
-  return [...Array(3)].map((_, i) => [
-    // week i
-    ...[...Array(numDaysPerWeek)].map(_ => {
+  const numWeeksPerCycle = 3;
+  const totalNumSessions = numDaysPerWeek * numWeeksPerCycle;
+
+  return [
+    ...[...Array(totalNumSessions)].map((_, nthSession) => {
       const mainLift = nextLiftGenerator.next().value;
+      const week = Math.floor(nthSession / numDaysPerWeek) + 1;
+      const day = Math.floor(nthSession % numDaysPerWeek) + 1;
 
       return {
+        week,
+        day,
         jumpsThrows,
         sets: [
           // 3 main sets
-          ...[...Array(3)].map((_, j) => ({
+          ...[...Array(3)].map(() => ({
             lift: mainLift,
             numSets: 1,
             numReps: 5,
             weight: calculateSetWeight(
               trainingMaxes[mainLift],
-              mainLiftPercentages[i][j]
+              mainLiftPercentages[week - 1][day - 1]
             ),
           })),
           // supplemental sets
@@ -61,14 +66,14 @@ const foreverBBBGenerator = (trainingMaxes, options) => {
             numReps: 10,
             weight: calculateSetWeight(
               trainingMaxes[mainLift],
-              supplementalTmPercentages[i]
+              supplementalTmPercentages[week - 1]
             ),
           },
         ],
         assistance,
       };
     }),
-  ]);
+  ];
 };
 
 module.exports = foreverBBBGenerator;

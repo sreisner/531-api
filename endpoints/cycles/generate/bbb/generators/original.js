@@ -38,27 +38,32 @@ const originalBBBGenerator = (trainingMaxes, options) => {
     press: pressSupplementalTmPercentage,
   };
 
-  // all sessions - 3 weeks
-  return [...Array(3)].map((_, i) => [
-    // week i
-    ...[...Array(numDaysPerWeek)].map(_ => {
+  const numWeeksPerCycle = 3;
+  const totalNumSessions = numDaysPerWeek * numWeeksPerCycle;
+
+  return [
+    ...[...Array(totalNumSessions)].map((_, nthSession) => {
       const mainLift = nextLiftGenerator.next().value;
+      const week = Math.floor(nthSession / numDaysPerWeek) + 1;
+      const day = Math.floor(nthSession % numDaysPerWeek) + 1;
 
       const supplementalLift = shouldAlternate
         ? alternateLiftMap[mainLift]
         : mainLift;
 
       return {
+        week,
+        day,
         jumpsThrows,
         sets: [
           // 3 main sets
-          ...[...Array(3)].map((_, j) => ({
+          ...[...Array(3)].map(() => ({
             lift: mainLift,
             numSets: 1,
             numReps: 5,
             weight: calculateSetWeight(
               trainingMaxes[mainLift],
-              mainLiftPercentages[i][j]
+              mainLiftPercentages[week - 1][day - 1]
             ),
           })),
           // supplemental sets
@@ -75,7 +80,7 @@ const originalBBBGenerator = (trainingMaxes, options) => {
         assistance,
       };
     }),
-  ]);
+  ];
 };
 
 module.exports = originalBBBGenerator;
