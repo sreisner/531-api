@@ -57,13 +57,13 @@ const originalBBBGenerator = (trainingMaxes, options) => {
         jumpsThrows,
         sets: [
           // 3 main sets
-          ...[...Array(3)].map(() => ({
+          ...[...Array(3)].map((_, setIndex) => ({
             lift: mainLift,
             numSets: 1,
             numReps: 5,
             weight: calculateSetWeight(
               trainingMaxes[mainLift],
-              mainLiftPercentages[week - 1][day - 1]
+              mainLiftPercentages[week - 1][setIndex]
             ),
           })),
           // supplemental sets
