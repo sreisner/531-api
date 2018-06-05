@@ -33,7 +33,7 @@ const createEndpoints = router => {
 
       res.json({
         trainingMaxes,
-        sessions: generatorFunc(trainingMaxes, options),
+        sessionMeta: generatorFunc(trainingMaxes, options),
         options,
         templateId,
         variantId,
