@@ -9,6 +9,7 @@ const register = require('./register');
 const users = require('./users');
 const templates = require('./templates');
 const cycles = require('./cycles');
+const feedback = require('./feedback');
 
 const configureEndpoints = app => {
   configureMiddleware(app);
@@ -48,6 +49,11 @@ const configureRoutes = app => {
   templates.createEndpoints(app);
   cycles.createEndpoints(app);
   users.createEndpoints(app);
+
+  const authenticatedRouter = getAuthenticatedRouter();
+  feedback.createEndpoints(authenticatedRouter);
+
+  app.use(authenticatedRouter);
 };
 
 const getAuthenticatedRouter = () => {
