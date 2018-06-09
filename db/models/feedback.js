@@ -8,8 +8,8 @@ const FeedbackSchema = Schema(
     feedbackType: String,
     comments: String,
     createdOn: {
-      type: Schema.Types.Date,
-      default: new Date(),
+      type: Date,
+      default: Date.now,
     },
   },
   { collection: 'feedback' }
