@@ -2,8 +2,25 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const { Feedback } = require('../../db/models');
 
+const isValid = data => {
+  const { satisfaction, feedbackType, comments } = data;
+
+  return (
+    satisfaction >= 0 &&
+    satisfaction <= 4 &&
+    ['Feature Request', 'Bug', 'Inaccurate Template', 'Other'].includes(
+      feedbackType
+    ) &&
+    comments.length > 0
+  );
+};
+
 const createEndpoints = router => {
   router.route('/feedback').post((req, res) => {
+    if (!isValid(req.body)) {
+      return res.status(400).send('The form is invalid.');
+    }
+
     Feedback.find(
       { userId: req.user._id, createdOn: { $gte: new Date() - 86400000 } },
       (err, docs) => {
