@@ -13,4 +13,4 @@ mongoConfigurator.connect();
 passportConfigurator.configurePassport(app);
 endpointConfigurator.configureEndpoints(app);
 
-app.listen(3001, () => console.log('Running...'));
+app.listen(process.env.PORT || 3001, () => console.log('Running...'));
