@@ -1,141 +1,143 @@
-{
-  "_id": { "$oid": "5af86d838fa8d0ac32d6eb57" },
-  "name": "Boring But Big",
-  "description": [
-    "Always a Leader template.",
-    "Great for people loking to gain some muscle.",
-    "Strength can be gained in younger lifters.",
-    "Not a good option for athletes, true beginners and very advanced lifters.",
-    "85% TM for most lifters, 90% for beginners."
-  ],
-  "options": [
-    {
-      "key": "numDaysPerWeek",
-      "displayText": "Days Per Week",
-      "type": "select",
-      "defaultValue": { "$numberInt": "3" },
-      "values": [
-        { "displayText": "3", "value": { "$numberInt": "3" } },
-        { "displayText": "4", "value": { "$numberInt": "4" } }
-      ]
-    },
-    {
-      "key": "programming",
-      "displayText": "Programming",
-      "type": "select",
-      "defaultValue": "351",
-      "values": [
-        { "displayText": "3/5/1", "value": "351" },
-        { "displayText": "5/3/1", "value": "531" }
-      ]
-    },
-    {
-      "key": "startingLift",
-      "displayText": "First Session Main Lift",
-      "type": "select",
-      "defaultValue": "squat",
-      "values": [
-        { "displayText": "Squat", "value": "squat" },
-        { "displayText": "Bench", "value": "bench" },
-        { "displayText": "Deadlift", "value": "deadlift" },
-        { "displayText": "Press", "value": "press" }
-      ]
-    }
-  ],
-  "variants": [
-    {
-      "name": "Forever",
-      "options": [
-        {
-          "key": "advanced",
-          "displayText": "Advanced Intermediate?",
-          "type": "boolean",
-          "defaultValue": false,
-          "helpText":
-            "Use this if you consider yourself to be an advanced intermediate or above lifter.  Advanced intermediate lifters need lower supplemental training max percentages."
-        },
-        {
-          "key": "light",
-          "displayText": "Light",
-          "type": "boolean",
-          "defaultValue": false,
-          "helpText":
-            "Forever BBB Light has you only performing three work sets for the supplemental lift."
-        }
-      ],
-      "id": { "$oid": "5af870479a10591ebc082a6b" }
-    },
-    {
-      "name": "Original",
-      "options": [
-        {
-          "key": "squatSupplementalTmPercentage",
-          "displayText": "Squat Supp. TM %",
-          "type": "select",
-          "defaultValue": { "$numberDouble": "0.5" },
-          "values": [
-            { "displayText": "30%", "value": { "$numberDouble": "0.3" } },
-            { "displayText": "35%", "value": { "$numberDouble": "0.35" } },
-            { "displayText": "40%", "value": { "$numberDouble": "0.4" } },
-            { "displayText": "45%", "value": { "$numberDouble": "0.45" } },
-            { "displayText": "50%", "value": { "$numberDouble": "0.5" } },
-            { "displayText": "55%", "value": { "$numberDouble": "0.55" } },
-            { "displayText": "60%", "value": { "$numberDouble": "0.6" } }
-          ]
-        },
-        {
-          "key": "deadliftSupplementalTmPercentage",
-          "displayText": "Deadlift Supp. TM %",
-          "type": "select",
-          "defaultValue": { "$numberDouble": "0.5" },
-          "values": [
-            { "displayText": "30%", "value": { "$numberDouble": "0.3" } },
-            { "displayText": "35%", "value": { "$numberDouble": "0.35" } },
-            { "displayText": "40%", "value": { "$numberDouble": "0.4" } },
-            { "displayText": "45%", "value": { "$numberDouble": "0.45" } },
-            { "displayText": "50%", "value": { "$numberDouble": "0.5" } },
-            { "displayText": "55%", "value": { "$numberDouble": "0.55" } },
-            { "displayText": "60%", "value": { "$numberDouble": "0.6" } }
-          ]
-        },
-        {
-          "key": "pressSupplementalTmPercentage",
-          "displayText": "Press Supp. TM %",
-          "type": "select",
-          "defaultValue": { "$numberDouble": "0.5" },
-          "values": [
-            { "displayText": "30%", "value": { "$numberDouble": "0.3" } },
-            { "displayText": "35%", "value": { "$numberDouble": "0.35" } },
-            { "displayText": "40%", "value": { "$numberDouble": "0.4" } },
-            { "displayText": "45%", "value": { "$numberDouble": "0.45" } },
-            { "displayText": "50%", "value": { "$numberDouble": "0.5" } },
-            { "displayText": "55%", "value": { "$numberDouble": "0.55" } },
-            { "displayText": "60%", "value": { "$numberDouble": "0.6" } }
-          ]
-        },
-        {
-          "key": "benchSupplementalTmPercentage",
-          "displayText": "Bench Supp. TM %",
-          "type": "select",
-          "defaultValue": { "$numberDouble": "0.5" },
-          "values": [
-            { "displayText": "30%", "value": { "$numberDouble": "0.3" } },
-            { "displayText": "35%", "value": { "$numberDouble": "0.35" } },
-            { "displayText": "40%", "value": { "$numberDouble": "0.4" } },
-            { "displayText": "45%", "value": { "$numberDouble": "0.45" } },
-            { "displayText": "50%", "value": { "$numberDouble": "0.5" } },
-            { "displayText": "55%", "value": { "$numberDouble": "0.55" } },
-            { "displayText": "60%", "value": { "$numberDouble": "0.6" } }
-          ]
-        },
-        {
-          "key": "shouldAlternate",
-          "displayText": "Alternate Main/Supplemental Lift",
-          "type": "boolean",
-          "defaultValue": false
-        }
-      ],
-      "id": { "$oid": "5af8705f9a10591ebc082a6c" }
-    }
-  ]
-}
+[
+  {
+    "_id": { "$oid": "5af86d838fa8d0ac32d6eb57" },
+    "name": "Boring But Big",
+    "description": [
+      "Always a Leader template.",
+      "Great for people loking to gain some muscle.",
+      "Strength can be gained in younger lifters.",
+      "Not a good option for athletes, true beginners and very advanced lifters.",
+      "85% TM for most lifters, 90% for beginners."
+    ],
+    "options": [
+      {
+        "key": "numDaysPerWeek",
+        "displayText": "Days Per Week",
+        "type": "select",
+        "defaultValue": { "$numberInt": "3" },
+        "values": [
+          { "displayText": "3", "value": { "$numberInt": "3" } },
+          { "displayText": "4", "value": { "$numberInt": "4" } }
+        ]
+      },
+      {
+        "key": "programming",
+        "displayText": "Programming",
+        "type": "select",
+        "defaultValue": "351",
+        "values": [
+          { "displayText": "3/5/1", "value": "351" },
+          { "displayText": "5/3/1", "value": "531" }
+        ]
+      },
+      {
+        "key": "startingLift",
+        "displayText": "First Session Main Lift",
+        "type": "select",
+        "defaultValue": "squat",
+        "values": [
+          { "displayText": "Squat", "value": "squat" },
+          { "displayText": "Bench", "value": "bench" },
+          { "displayText": "Deadlift", "value": "deadlift" },
+          { "displayText": "Press", "value": "press" }
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "name": "Forever",
+        "options": [
+          {
+            "key": "advanced",
+            "displayText": "Advanced Intermediate?",
+            "type": "boolean",
+            "defaultValue": false,
+            "helpText":
+              "Use this if you consider yourself to be an advanced intermediate or above lifter.  Advanced intermediate lifters need lower supplemental training max percentages."
+          },
+          {
+            "key": "light",
+            "displayText": "Light",
+            "type": "boolean",
+            "defaultValue": false,
+            "helpText":
+              "Forever BBB Light has you only performing three work sets for the supplemental lift."
+          }
+        ],
+        "id": { "$oid": "5af870479a10591ebc082a6b" }
+      },
+      {
+        "name": "Original",
+        "options": [
+          {
+            "key": "squatSupplementalTmPercentage",
+            "displayText": "Squat Supp. TM %",
+            "type": "select",
+            "defaultValue": { "$numberDouble": "0.5" },
+            "values": [
+              { "displayText": "30%", "value": { "$numberDouble": "0.3" } },
+              { "displayText": "35%", "value": { "$numberDouble": "0.35" } },
+              { "displayText": "40%", "value": { "$numberDouble": "0.4" } },
+              { "displayText": "45%", "value": { "$numberDouble": "0.45" } },
+              { "displayText": "50%", "value": { "$numberDouble": "0.5" } },
+              { "displayText": "55%", "value": { "$numberDouble": "0.55" } },
+              { "displayText": "60%", "value": { "$numberDouble": "0.6" } }
+            ]
+          },
+          {
+            "key": "deadliftSupplementalTmPercentage",
+            "displayText": "Deadlift Supp. TM %",
+            "type": "select",
+            "defaultValue": { "$numberDouble": "0.5" },
+            "values": [
+              { "displayText": "30%", "value": { "$numberDouble": "0.3" } },
+              { "displayText": "35%", "value": { "$numberDouble": "0.35" } },
+              { "displayText": "40%", "value": { "$numberDouble": "0.4" } },
+              { "displayText": "45%", "value": { "$numberDouble": "0.45" } },
+              { "displayText": "50%", "value": { "$numberDouble": "0.5" } },
+              { "displayText": "55%", "value": { "$numberDouble": "0.55" } },
+              { "displayText": "60%", "value": { "$numberDouble": "0.6" } }
+            ]
+          },
+          {
+            "key": "pressSupplementalTmPercentage",
+            "displayText": "Press Supp. TM %",
+            "type": "select",
+            "defaultValue": { "$numberDouble": "0.5" },
+            "values": [
+              { "displayText": "30%", "value": { "$numberDouble": "0.3" } },
+              { "displayText": "35%", "value": { "$numberDouble": "0.35" } },
+              { "displayText": "40%", "value": { "$numberDouble": "0.4" } },
+              { "displayText": "45%", "value": { "$numberDouble": "0.45" } },
+              { "displayText": "50%", "value": { "$numberDouble": "0.5" } },
+              { "displayText": "55%", "value": { "$numberDouble": "0.55" } },
+              { "displayText": "60%", "value": { "$numberDouble": "0.6" } }
+            ]
+          },
+          {
+            "key": "benchSupplementalTmPercentage",
+            "displayText": "Bench Supp. TM %",
+            "type": "select",
+            "defaultValue": { "$numberDouble": "0.5" },
+            "values": [
+              { "displayText": "30%", "value": { "$numberDouble": "0.3" } },
+              { "displayText": "35%", "value": { "$numberDouble": "0.35" } },
+              { "displayText": "40%", "value": { "$numberDouble": "0.4" } },
+              { "displayText": "45%", "value": { "$numberDouble": "0.45" } },
+              { "displayText": "50%", "value": { "$numberDouble": "0.5" } },
+              { "displayText": "55%", "value": { "$numberDouble": "0.55" } },
+              { "displayText": "60%", "value": { "$numberDouble": "0.6" } }
+            ]
+          },
+          {
+            "key": "shouldAlternate",
+            "displayText": "Alternate Main/Supplemental Lift",
+            "type": "boolean",
+            "defaultValue": false
+          }
+        ],
+        "id": { "$oid": "5af8705f9a10591ebc082a6c" }
+      }
+    ]
+  }
+]
