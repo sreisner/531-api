@@ -1,6 +1,5 @@
 [
   {
-    "_id": { "$oid": "5af86d838fa8d0ac32d6eb57" },
     "name": "Boring But Big",
     "description": [
       "Always a Leader template.",
@@ -64,7 +63,7 @@
               "Forever BBB Light has you only performing three work sets for the supplemental lift."
           }
         ],
-        "id": { "$oid": "5af870479a10591ebc082a6b" }
+        "id": "5af870479a10591ebc082a6b"
       },
       {
         "name": "Original",
@@ -136,7 +135,7 @@
             "defaultValue": false
           }
         ],
-        "id": { "$oid": "5af8705f9a10591ebc082a6c" }
+        "id": "5af8705f9a10591ebc082a6c"
       }
     ]
   }

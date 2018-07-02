@@ -21,7 +21,7 @@ const VariantSchema = Schema({
 });
 
 const TemplateSchema = Schema({
-  name: String,
+  name: { type: String, unique: true },
   description: [String],
   options: [OptionSchema],
   variants: [VariantSchema],

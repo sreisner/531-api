@@ -1,11 +1,22 @@
-const { exec } = require('child_process');
+const { Template } = require('./models/template');
+const mongoose = require('mongoose');
 
-exec(
-  'mongoimport --db 531 --collection templates --file ./db/templates.json --jsonArray',
-  (err, stdout, stderr) => {
-    if (err) console.log(err);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/531');
 
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
-  }
+const templates = require('./templates.json');
+
+const promises = templates.map(template =>
+  new Template(template)
+    .save()
+    .then(() => console.log('success'))
+    .catch(err => {
+      // duplicate key
+      if (err.code !== 11000) {
+        throw err;
+      }
+    })
 );
+
+Promise.all(promises)
+  .then(() => mongoose.connection.close())
+  .catch(err => console.log(err));
