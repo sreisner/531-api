@@ -24,6 +24,13 @@ const configureMiddleware = app => {
         credentials: true,
       })
     );
+  } else {
+    app.use(
+      cors({
+        origin: 'https://wendler-531-app.herokuapp.com',
+        credentials: true,
+      })
+    );
   }
 
   app.use(bodyParser.json());
